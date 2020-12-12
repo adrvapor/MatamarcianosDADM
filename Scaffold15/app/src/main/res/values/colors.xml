@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#ff0000</color>
+    <color name="colorPrimaryDark">#c3000b</color>
+    <color name="colorAccent">#333333</color>
+    <color name="Rojo">#ff0000 </color>
+    <color name="Negro">#000000 </color>
+    <color name="Blanco">#ffffff </color>
+    <color name="Celeste">#c3e4f2 </color>
+    <color name="Celeste_Borde">#88bcd2 </color>
+    <color name="Rojo_Boton">#e04e4e </color>
+    <color name="Amarillo">#ead581 </color>
+    <color name="Gris">#e6e6e6 </color>
+    <color name="Gris_Borde">#c1c1c1 </color>
+    <color name="Verde">#84c479 </color>
 </resources>

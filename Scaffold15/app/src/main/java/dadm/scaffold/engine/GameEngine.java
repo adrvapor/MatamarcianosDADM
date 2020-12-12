@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import dadm.scaffold.ScaffoldActivity;
 import dadm.scaffold.input.InputController;
 import dadm.scaffold.sound.GameEvent;
 import dadm.scaffold.sound.SoundManager;
@@ -18,8 +19,10 @@ public class GameEngine {
     private List<GameObject> gameObjects = new ArrayList<GameObject>();
     private List<GameObject> objectsToAdd = new ArrayList<GameObject>();
     private List<GameObject> objectsToRemove = new ArrayList<GameObject>();
+    /*
     private List<Collision> detectedCollisions = new ArrayList<Collision>();
     private QuadTree quadTree = new QuadTree();
+    */
 
     private UpdateThread theUpdateThread;
     private DrawThread theDrawThread;
@@ -30,9 +33,12 @@ public class GameEngine {
 
     private SoundManager soundManager;
 
+    private static final long GAME_TIME = 60000;
+
     public int width;
     public int height;
     public double pixelFactor;
+    public int totalTime = 0;
 
     private Activity mainActivity;
 
@@ -49,7 +55,7 @@ public class GameEngine {
         this.height = theGameView.getHeight()
                 - theGameView.getPaddingTop() - theGameView.getPaddingTop();
 
-        quadTree.setArea(new Rect(0, 0, width, height));
+        //quadTree.setArea(new Rect(0, 0, width, height));
 
         this.pixelFactor = this.height / 400d;
     }
@@ -73,8 +79,13 @@ public class GameEngine {
         theUpdateThread.start();
 
         // Start the drawing thread
-        theDrawThread = new DrawThread(this);
-        theDrawThread.start();
+        //theDrawThread = new DrawThread(this);
+        //theDrawThread.start();
+    }
+
+    public void endGame() {
+        this.stopGame();
+        ((ScaffoldActivity)mainActivity).endGame(0, true);
     }
 
     public void stopGame() {
@@ -119,6 +130,13 @@ public class GameEngine {
     }
 
     public void onUpdate(long elapsedMillis) {
+
+        totalTime += elapsedMillis;
+
+        if(totalTime > GAME_TIME)
+            this.endGame();
+
+
         int nugameObjects = gameObjects.size();
         for (int i = 0; i < nugameObjects; i++) {
             GameObject go =  gameObjects.get(i);
@@ -132,9 +150,11 @@ public class GameEngine {
             while (!objectsToRemove.isEmpty()) {
                 GameObject objectToRemove = objectsToRemove.remove(0);
                 gameObjects.remove(objectToRemove);
+                /*
                 if (objectToRemove instanceof  ScreenGameObject) {
                     quadTree.removeGameObject((ScreenGameObject) objectToRemove);
                 }
+                */
             }
             while (!objectsToAdd.isEmpty()) {
                 GameObject gameObject = objectsToAdd.remove(0);
@@ -161,19 +181,39 @@ public class GameEngine {
 
     private void checkCollisions() {
         // Release the collisions from the previous step
+        int numObjects = gameObjects.size();
+        for (int i = 0; i < numObjects; i++) {
+            if (gameObjects.get(i) instanceof ScreenGameObject) {
+                ScreenGameObject objectA = (ScreenGameObject) gameObjects.get(i);
+                for (int j = i + 1; j < numObjects; j++) {
+                    if (gameObjects.get(j) instanceof ScreenGameObject) {
+                        ScreenGameObject objectB = (ScreenGameObject) gameObjects.get(j);
+                        if (objectA.checkCollision(objectB)) {
+                            objectA.onCollision(this, objectB);
+                            objectB.onCollision(this, objectA);
+                        }
+                    }
+                }
+            }
+        }
+
+        /*
         while (!detectedCollisions.isEmpty()) {
             Collision.release(detectedCollisions.remove(0));
         }
         quadTree.checkCollisions(this, detectedCollisions);
+        */
     }
 
     private void addGameObjectNow (GameObject object) {
         gameObjects.add(object);
+        /*
         if (object instanceof ScreenGameObject) {
             ScreenGameObject sgo = (ScreenGameObject) object;
 
-            quadTree.addGameObject(sgo);
+            //quadTree.addGameObject(sgo);
         }
+        */
     }
 
     public void setSoundManager(SoundManager soundManager) {

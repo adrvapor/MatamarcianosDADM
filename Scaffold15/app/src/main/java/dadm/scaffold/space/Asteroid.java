@@ -23,12 +23,12 @@ public class Asteroid extends Sprite {
     public void init(GameEngine gameEngine) {
         // They initialize in a [-30, 30] degrees angle
         double angle = gameEngine.random.nextDouble()*Math.PI/3d-Math.PI/6d;
-        speedX = speed * Math.sin(angle);
-        speedY = speed * Math.cos(angle);
+        speedX = - speed * Math.cos(angle);
+        speedY = speed * Math.sin(angle);
         // Asteroids initialize in the central 50% of the screen horizontally
-        positionX = gameEngine.random.nextInt(gameEngine.width/2)+gameEngine.width/4;
+        positionY = gameEngine.random.nextInt(gameEngine.height/2)+gameEngine.height/4;
         // They initialize outside of the screen vertically
-        positionY = -height;
+        positionX = width + gameEngine.width;
         rotationSpeed = angle*(180d / Math.PI)/250d; // They rotate 4 times their ange in a second.
         rotation = gameEngine.random.nextInt(360);
     }
@@ -48,6 +48,7 @@ public class Asteroid extends Sprite {
         positionX += speedX * elapsedMillis;
         positionY += speedY * elapsedMillis;
         rotation += rotationSpeed * elapsedMillis;
+        System.out.println(elapsedMillis);
         if (rotation > 360) {
             rotation = 0;
         }
@@ -55,7 +56,7 @@ public class Asteroid extends Sprite {
             rotation = 360;
         }
         // Check of the sprite goes out of the screen and return it to the pool if so
-        if (positionY > gameEngine.height) {
+        if (positionX < 0) {
             // Return to the pool
             gameEngine.removeGameObject(this);
             gameController.returnToPool(this);

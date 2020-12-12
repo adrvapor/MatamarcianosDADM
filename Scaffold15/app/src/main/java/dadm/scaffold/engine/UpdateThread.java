@@ -46,7 +46,16 @@ public class UpdateThread extends Thread {
                 }
                 currentTimeMillis = System.currentTimeMillis();
             }
+            if (elapsedMillis < 17) { // This is 50 fps
+                try {
+                    Thread.sleep(17 -elapsedMillis);
+                } catch (InterruptedException e) {
+                    // We just continue
+                }
+            }
+
             theGameEngine.onUpdate(elapsedMillis);
+            theGameEngine.onDraw();
             previousTimeMillis = currentTimeMillis;
         }
     }

@@ -13,7 +13,7 @@ public abstract class Sprite extends ScreenGameObject {
 
     protected double pixelFactor;
 
-    private final Bitmap bitmap;
+    protected final Bitmap bitmap;
 
     private final Matrix matrix = new Matrix();
 

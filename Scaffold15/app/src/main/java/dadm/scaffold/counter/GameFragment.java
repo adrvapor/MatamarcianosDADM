@@ -3,11 +3,15 @@ package dadm.scaffold.counter;
 import android.content.DialogInterface;
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.ProgressBar;
+
+import java.util.Timer;
 
 import dadm.scaffold.BaseFragment;
 import dadm.scaffold.R;
@@ -22,6 +26,9 @@ import dadm.scaffold.space.SpaceShipPlayer;
 
 public class GameFragment extends BaseFragment implements View.OnClickListener {
     private GameEngine theGameEngine;
+    CountDownTimer countDownTimer;
+    ProgressBar progressBar;
+    public int time;
 
     public GameFragment() {
     }
@@ -55,6 +62,21 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
             }
         });
 
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        progressBar.setProgress(0);
+
+        countDownTimer = new CountDownTimer(60000, 1000) {
+            @Override
+            public void onTick(long l) {
+                time++;
+                progressBar.setProgress((int)time*100/(60000/1000));
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
 
     }
 
@@ -130,4 +152,6 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
             button.setText(R.string.resume);
         }
     }
+
+
 }
