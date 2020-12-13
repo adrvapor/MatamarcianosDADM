@@ -21,7 +21,7 @@ public class Enemy extends Sprite {
     private int lives = 5;
 
     public Enemy(GameController gameController, GameEngine gameEngine) {
-        super(gameEngine, R.drawable.robot);
+        super(gameEngine, R.drawable.virus);
         this.speed = - 200d * pixelFactor/1000d;
         this.gameController = gameController;
     }
@@ -68,7 +68,7 @@ public class Enemy extends Sprite {
             if (bullet == null) {
                 return;
             }
-            bullet.init(this, positionX, positionY + height/2);
+            bullet.init(this, positionX, positionY + height);
             gameEngine.addGameObject(bullet);
             //gameEngine.onGameEvent(GameEvent.LaserFired);
             timeSinceLastFire = 0;

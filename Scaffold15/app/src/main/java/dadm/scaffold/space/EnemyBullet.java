@@ -13,7 +13,7 @@ public class EnemyBullet extends Sprite {
     private Enemy parent;
 
     public EnemyBullet(GameEngine gameEngine){
-        super(gameEngine, R.drawable.bullet);
+        super(gameEngine, R.drawable.enemybullet);
 
         speedFactor = - gameEngine.pixelFactor * 600d/1000d;
     }

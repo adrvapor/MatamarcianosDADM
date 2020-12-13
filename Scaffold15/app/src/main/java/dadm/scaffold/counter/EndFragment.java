@@ -10,7 +10,7 @@ import dadm.scaffold.R;
 import dadm.scaffold.ScaffoldActivity;
 
 
-public class EndFragment extends BaseFragment implements View.OnClickListener {
+public class EndFragment extends BaseFragment {
     public EndFragment() {
     }
 
@@ -27,8 +27,4 @@ public class EndFragment extends BaseFragment implements View.OnClickListener {
         //view.findViewById(R.id.btn_start).setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View v) {
-        ((ScaffoldActivity)getActivity()).startGame();
-    }
 }

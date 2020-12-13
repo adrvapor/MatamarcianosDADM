@@ -12,10 +12,9 @@ public class Asteroid extends Sprite {
     private double speed;
     private double speedX;
     private double speedY;
-    private double rotationSpeed;
 
     public Asteroid(GameController gameController, GameEngine gameEngine) {
-        super(gameEngine, R.drawable.a10000);
+        super(gameEngine, R.drawable.glitch);
         this.speed = 200d * pixelFactor/1000d;
         this.gameController = gameController;
     }
@@ -29,8 +28,6 @@ public class Asteroid extends Sprite {
         positionY = gameEngine.random.nextInt(gameEngine.height/2)+gameEngine.height/4;
         // They initialize outside of the screen vertically
         positionX = width + gameEngine.width;
-        rotationSpeed = angle*(180d / Math.PI)/250d; // They rotate 4 times their ange in a second.
-        rotation = gameEngine.random.nextInt(360);
     }
 
     @Override
@@ -47,14 +44,7 @@ public class Asteroid extends Sprite {
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
         positionX += speedX * elapsedMillis;
         positionY += speedY * elapsedMillis;
-        rotation += rotationSpeed * elapsedMillis;
         System.out.println(elapsedMillis);
-        if (rotation > 360) {
-            rotation = 0;
-        }
-        else if (rotation < 0) {
-            rotation = 360;
-        }
         // Check of the sprite goes out of the screen and return it to the pool if so
         if (positionX < 0) {
             // Return to the pool

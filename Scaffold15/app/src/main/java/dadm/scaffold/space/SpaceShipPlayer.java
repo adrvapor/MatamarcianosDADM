@@ -28,9 +28,19 @@ public class SpaceShipPlayer extends Sprite {
     private double speedFactor;
 
 
-    public SpaceShipPlayer(GameEngine gameEngine){
-        super(gameEngine, R.drawable.ship);
-        speedFactor = pixelFactor * 100d / 500d; //1000d; // We want to move at 100px per second on a 400px tall screen
+    public SpaceShipPlayer(GameEngine gameEngine, int color){
+        super(gameEngine, R.drawable.customship);
+        switch (color){
+            case 1:
+                changeBitmap(gameEngine, R.drawable.customshipred);
+                break;
+            case 2:
+                changeBitmap(gameEngine, R.drawable.customshipwhite);
+                break;
+            default:
+                break;
+        }
+        speedFactor = pixelFactor * 300d / 1000d; //1000d; // We want to move at 100px per second on a 400px tall screen
         maxX = gameEngine.width - width;
         maxY = gameEngine.height - height;
 
@@ -104,7 +114,7 @@ public class SpaceShipPlayer extends Sprite {
             if (bullet == null) {
                 return;
             }
-            bullet.init(this, positionX + width, positionY + height/2);
+            bullet.init(this, positionX + width, positionY + height);
             gameEngine.addGameObject(bullet);
             gameEngine.onGameEvent(GameEvent.LaserFired);
 
@@ -115,13 +125,13 @@ public class SpaceShipPlayer extends Sprite {
             timeSinceLastFire += elapsedMillis;
         }
 
-        if(timeSinceLastSpecialFire > TIME_BETWEEN_SPECIAL_BULLETS && gameEngine.theInputController.isFiring){
+        if(/*timeSinceLastSpecialFire > TIME_BETWEEN_SPECIAL_BULLETS && */gameEngine.theInputController.isFiring){
             SpecialBullet sb = getSpecialBullet();
             if (sb == null){
                 return;
             }
 
-            sb.init(this, positionX + width, positionY + height/2);
+            sb.init(this, positionX + width, positionY + height);
             gameEngine.addGameObject(sb);
             gameEngine.onGameEvent(GameEvent.LaserFired);
 

@@ -5,6 +5,7 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import dadm.scaffold.counter.EndFragment;
 import dadm.scaffold.counter.GameFragment;
@@ -34,9 +35,15 @@ public class ScaffoldActivity extends AppCompatActivity {
         return soundManager;
     }
 
-    public void startGame() {
+    public void startGame(int i) {
         // Navigate the the game fragment, which makes the start automatically
-        navigateToFragment( new GameFragment());
+        Bundle b = new Bundle();
+        b.putInt("shipIndex", i);
+
+        GameFragment gf = new GameFragment();
+        gf.setArguments(b);
+
+        navigateToFragment(gf);
     }
 
     public void endGame(int points, boolean victory) {

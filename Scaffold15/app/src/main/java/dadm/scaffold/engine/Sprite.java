@@ -13,7 +13,7 @@ public abstract class Sprite extends ScreenGameObject {
 
     protected double pixelFactor;
 
-    protected final Bitmap bitmap;
+    protected Bitmap bitmap;
 
     private final Matrix matrix = new Matrix();
 
@@ -44,5 +44,12 @@ public abstract class Sprite extends ScreenGameObject {
         matrix.postTranslate((float) positionX, (float) positionY);
         matrix.postRotate((float) rotation, (float) (positionX + width/2), (float) (positionY + height/2));
         canvas.drawBitmap(bitmap, matrix, null);
+    }
+
+    protected void changeBitmap(GameEngine gameEngine, int drawableRes){
+        Resources r = gameEngine.getContext().getResources();
+        Drawable spriteDrawable = r.getDrawable(drawableRes);
+
+        this.bitmap = ((BitmapDrawable) spriteDrawable).getBitmap();
     }
 }
