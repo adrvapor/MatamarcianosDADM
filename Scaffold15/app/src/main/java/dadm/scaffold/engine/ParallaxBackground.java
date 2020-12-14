@@ -20,9 +20,9 @@ public class ParallaxBackground extends ScreenGameObject{
 
     protected double mTargetWidth;
 
-    protected double mSpeedY;
+    protected double mSpeedX;
 
-    protected double mPositionY;
+    protected double mPositionX;
 
     protected double mPixelFactor;
 
@@ -39,8 +39,8 @@ public class ParallaxBackground extends ScreenGameObject{
         Drawable spriteDrawable = gameEngine.getContext().getResources().getDrawable(drawableResId);
         mBitmap = ((BitmapDrawable)spriteDrawable).getBitmap();
 
-        mPixelFactor = gameEngine.pixelFactor;
-        mSpeedY = speed*mPixelFactor/1000d;
+        mPixelFactor = gameEngine.pixelFactor* 0.5;
+        mSpeedX = speed*mPixelFactor/50d;
 
         mImageHeight = spriteDrawable.getIntrinsicHeight()*mPixelFactor;
         mImageWidth = spriteDrawable.getIntrinsicWidth()*mPixelFactor;
@@ -57,35 +57,35 @@ public class ParallaxBackground extends ScreenGameObject{
     }
 
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
-        mPositionY += mSpeedY * elapsedMillis;
+        mPositionX -= mSpeedX * elapsedMillis;
     }
 
     public void onDraw(Canvas canvas) {
-        if (mPositionY > 0) {
+        if (mPositionX < 0) { //Cuando esta pintando las 2 imagenes (loop)
             mMatrix.reset();
             mMatrix.postScale((float) (mPixelFactor),
                     (float) (mPixelFactor));
-            mMatrix.postTranslate(0, (float) (mPositionY - mImageHeight));
+            mMatrix.postTranslate((float) (mPositionX + mImageWidth), 0);
             canvas.drawBitmap(mBitmap, mMatrix, null);
         }
         mMatrix.reset();
         mMatrix.postScale((float) (mPixelFactor),
                 (float) (mPixelFactor));
-        mMatrix.postTranslate(0, (float) mPositionY);
+        mMatrix.postTranslate((float) mPositionX, 0);
         canvas.drawBitmap(mBitmap, mMatrix, null);
 
-        if (mPositionY > mScreenHeight) {
-            mPositionY -= mImageHeight;
+        if (mPositionX < -mImageWidth) {
+            mPositionX = 0;
         }
     }
 
     private void efficientDraw(Canvas canvas) {
-        if (mPositionY < 0) {
+        if (mPositionX < 0) {
 
             mSrcRect.set(0,
-                    (int) (-mPositionY/mPixelFactor),
+                    (int) (-mPositionX /mPixelFactor),
                     (int) (mTargetWidth/mPixelFactor),
-                    (int) ((mScreenHeight - mPositionY)/mPixelFactor));
+                    (int) ((mScreenHeight - mPositionX)/mPixelFactor));
             mDstRect.set(0,
                     0,
                     (int) mTargetWidth,
@@ -96,25 +96,25 @@ public class ParallaxBackground extends ScreenGameObject{
             mSrcRect.set(0,
                     0,
                     (int) (mTargetWidth/mPixelFactor),
-                    (int) ((mScreenHeight - mPositionY) / mPixelFactor));
+                    (int) ((mScreenHeight - mPositionX) / mPixelFactor));
             mDstRect.set(0,
-                    (int) mPositionY,
+                    (int) mPositionX,
                     (int) mTargetWidth,
                     (int) mScreenHeight);
             canvas.drawBitmap(mBitmap, mSrcRect, mDstRect, null);
 // We need to draw the previous block
             mSrcRect.set(0,
-                    (int) ((mImageHeight - mPositionY) / mPixelFactor),
+                    (int) ((mImageHeight - mPositionX) / mPixelFactor),
                     (int) (mTargetWidth/mPixelFactor),
                     (int) (mImageHeight/mPixelFactor));
             mDstRect.set(0,
                     0,
                     (int) mTargetWidth,
-                    (int) mPositionY);
+                    (int) mPositionX);
             canvas.drawBitmap(mBitmap, mSrcRect, mDstRect, null);
         }
-        if (mPositionY > mScreenHeight) {
-            mPositionY -= mImageHeight;
+        if (mPositionX > mScreenHeight) {
+            mPositionX -= mImageHeight;
         }
     }
 
