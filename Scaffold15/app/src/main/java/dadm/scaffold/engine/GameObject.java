@@ -2,6 +2,8 @@ package dadm.scaffold.engine;
 
 import android.graphics.Canvas;
 
+import dadm.scaffold.sound.GameEvent;
+
 public abstract class GameObject {
 
     public abstract void startGame();
@@ -18,6 +20,10 @@ public abstract class GameObject {
     };
 
     public void onAddedToGameUiThread(){
+    }
+
+    public void onGameEvent(GameEvent gameEvent){
+
     }
 
     public final Runnable onRemovedRunnable = new Runnable() {

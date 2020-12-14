@@ -60,7 +60,7 @@ public class Bullet extends Sprite {
             removeObject(gameEngine);
             Enemy e = (Enemy) otherObject;
             e.takeDamage(gameEngine, 1);
-            //gameEngine.onGameEvent(GameEvent.AsteroidHit);
+            gameEngine.onGameEvent(GameEvent.VirusHit);
             // Add some score
         }
     }

@@ -36,4 +36,27 @@
 
     <include layout="@layout/view_joystick" />
 
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="12dp"
+            android:id="@+id/score_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textColor="@color/Negro"
+            android:text="@string/score"/>
+        <TextView
+            android:id="@+id/score_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:layout_below="@+id/score_title"
+            android:layout_alignLeft="@+id/score_title"
+            android:textColor="@color/Negro"
+            android:text="000000"/>
+    </RelativeLayout>
+
 </FrameLayout>

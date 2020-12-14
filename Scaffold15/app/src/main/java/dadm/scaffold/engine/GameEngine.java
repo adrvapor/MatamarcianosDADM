@@ -222,6 +222,10 @@ public class GameEngine {
 
     public void onGameEvent (GameEvent gameEvent) {
         // We notify all the GameObjects
+        int numObjects = gameObjects.size();
+        for (int i=0; i<numObjects; i++) {
+            gameObjects.get(i).onGameEvent(gameEvent);
+        }
         // Also the sound manager
         soundManager.playSoundForGameEvent(gameEvent);
     }

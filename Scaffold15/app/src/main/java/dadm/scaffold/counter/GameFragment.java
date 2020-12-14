@@ -19,6 +19,7 @@ import dadm.scaffold.ScaffoldActivity;
 import dadm.scaffold.engine.FramesPerSecondCounter;
 import dadm.scaffold.engine.GameEngine;
 import dadm.scaffold.engine.GameView;
+import dadm.scaffold.engine.ScoreGameObject;
 import dadm.scaffold.input.JoystickInputController;
 import dadm.scaffold.space.GameController;
 import dadm.scaffold.space.SpaceShipPlayer;
@@ -58,6 +59,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                 theGameEngine = new GameEngine(getActivity(), gameView);
                 theGameEngine.setSoundManager(getScaffoldActivity().getSoundManager());
                 theGameEngine.addGameObject(new ParallaxBackground(theGameEngine, 20,R.drawable.fondo));
+                theGameEngine.addGameObject(new ScoreGameObject(getView(),R.id.score_value));
                 theGameEngine.setTheInputController(new JoystickInputController(getView()));
                 if(b != null)
                     theGameEngine.addGameObject(new SpaceShipPlayer(theGameEngine, b.getInt("shipIndex", 0)));
