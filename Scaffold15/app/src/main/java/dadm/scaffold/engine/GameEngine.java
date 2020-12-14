@@ -85,6 +85,7 @@ public class GameEngine {
 
     public void endGame() {
         this.stopGame();
+
         ((ScaffoldActivity)mainActivity).endGame(0, true);
     }
 
@@ -92,9 +93,11 @@ public class GameEngine {
         if (theUpdateThread != null) {
             theUpdateThread.stopGame();
         }
+        /*
         if (theDrawThread != null) {
             theDrawThread.stopGame();
         }
+        */
     }
 
     public void pauseGame() {

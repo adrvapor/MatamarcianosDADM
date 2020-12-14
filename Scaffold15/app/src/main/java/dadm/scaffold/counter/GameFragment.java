@@ -132,7 +132,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         theGameEngine.stopGame();
-                        ((ScaffoldActivity)getActivity()).navigateBack();
+                        ((ScaffoldActivity)getActivity()).backToMenu();
                     }
                 })
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {

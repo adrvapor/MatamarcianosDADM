@@ -37,36 +37,39 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="20dp"
                     android:text="CUSTOMIZAR NAVE"
+                    android:textSize="20dp"
                     android:fontFamily="@font/gillsansbold"
                     android:textColor="#FFFFFF"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:orientation="horizontal"
                     android:layout_height="match_parent"
-                    android:background="@drawable/fondo_gris"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:background="@drawable/boton"
+                    android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/custom_l"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:layout_gravity="center_vertical"/>
+                        android:background="@drawable/arrow_l"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="35dp" />
 
                     <ImageView
                         android:id="@+id/ship"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/customship"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:src="@drawable/customship" />
 
                     <Button
                         android:id="@+id/custom_r"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:layout_gravity="center_vertical"/>
+                        android:background="@drawable/arrow_r"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="35dp" />
 
                 </LinearLayout>
 
@@ -74,33 +77,36 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="vertical"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/btn_start"
                     android:layout_width="220dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:background="@drawable/boton"
                     android:fontFamily="@font/gillsans"
                     android:text="Comenzar partida"
-                    android:textSize="20dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20dp"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="10dp"/>
 
                 <Button
-                    android:id="@+id/btn_2"
+                    android:id="@+id/btn_exit"
                     android:layout_width="220dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:background="@drawable/boton"
                     android:fontFamily="@font/gillsans"
-                    android:text="Comenzar partida"
-                    android:textSize="20dp"
+                    android:text="Salir del juego"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20dp"
+                    android:layout_weight="1"/>
 
 
             </LinearLayout>
