@@ -17,14 +17,17 @@ public class ScaffoldActivity extends AppCompatActivity {
     private static final String TAG_FRAGMENT = "content";
 
     private SoundManager soundManager;
+    private MainMenuFragment mainmenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mainmenu = new MainMenuFragment();
+
         setContentView(R.layout.activity_scaffold);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new MainMenuFragment(), TAG_FRAGMENT)
+                    .add(R.id.container, mainmenu, TAG_FRAGMENT)
                     .commit();
         }
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
@@ -35,10 +38,11 @@ public class ScaffoldActivity extends AppCompatActivity {
         return soundManager;
     }
 
-    public void startGame(int i) {
+    public void startGame() {
         // Navigate the the game fragment, which makes the start automatically
+
         Bundle b = new Bundle();
-        b.putInt("shipIndex", i);
+        b.putInt("shipIndex", mainmenu.shipIndex);
 
         GameFragment gf = new GameFragment();
         gf.setArguments(b);
@@ -47,8 +51,11 @@ public class ScaffoldActivity extends AppCompatActivity {
     }
 
     public void endGame(int points, boolean victory) {
-        // Navigate the the game fragment, which makes the start automatically
         navigateToFragment( new EndFragment());
+    }
+
+    public void backToMenu(){
+        navigateToFragment(mainmenu);
     }
 
     private void navigateToFragment(BaseFragment dst) {

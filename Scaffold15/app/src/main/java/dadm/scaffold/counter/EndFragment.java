@@ -24,7 +24,28 @@ public class EndFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //view.findViewById(R.id.btn_start).setOnClickListener(this);
+
+        view.findViewById(R.id.btn_restart).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((ScaffoldActivity)getActivity()).startGame();
+            }
+        });
+
+        view.findViewById(R.id.btn_menu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((ScaffoldActivity)getActivity()).backToMenu();
+            }
+        });
     }
+
+
+    @Override
+    public boolean onBackPressed() {
+        ((ScaffoldActivity)getActivity()).backToMenu();
+        return true;
+    }
+
 
 }

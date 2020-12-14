@@ -72,6 +72,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         });
 
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.customprogressbar));
         progressBar.setProgress(0);
 
         countDownTimer = new CountDownTimer(60000, 1000) {
@@ -136,7 +137,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         theGameEngine.stopGame();
-                        ((ScaffoldActivity)getActivity()).navigateBack();
+                        ((ScaffoldActivity)getActivity()).backToMenu();
                     }
                 })
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {

@@ -35,7 +35,14 @@ public class MainMenuFragment extends BaseFragment{
         view.findViewById(R.id.btn_start).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((ScaffoldActivity)getActivity()).startGame(shipIndex);
+                ((ScaffoldActivity)getActivity()).startGame();
+            }
+        });
+
+        view.findViewById(R.id.btn_exit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.os.Process.killProcess(android.os.Process.myPid());
             }
         });
 
@@ -52,6 +59,8 @@ public class MainMenuFragment extends BaseFragment{
                 changeIdx(-1);
             }
         });
+
+        changeIdx(0);
     }
 
     public void changeIdx(int i){
