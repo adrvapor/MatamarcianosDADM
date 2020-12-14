@@ -12,11 +12,14 @@ public class GameController extends GameObject {
 
     private static final int TIME_BETWEEN_ASTEROIDS = 500;
     private static final int TIME_BETWEEN_ENEMIES = 3000;
+    private static final int TIME_BETWEEN_POWERUPS = 4000;
     private long currentMillis;
     private List<Asteroid> asteroidPool = new ArrayList<Asteroid>();
     private List<Enemy> enemyPool = new ArrayList<Enemy>();
+    private List<Powerup> powerupPool = new ArrayList<>();
     private int asteroidsSpawned;
     private int enemiesSpawned;
+    private int powerupSpawned;
 
     public GameController(GameEngine gameEngine) {
         // We initialize the pool of items now
@@ -26,6 +29,9 @@ public class GameController extends GameObject {
         for (int i=0; i<2; i++) {
             enemyPool.add(new Enemy(this, gameEngine));
         }
+        for (int i=0; i<3; i++) {
+            powerupPool.add(new Powerup(this, gameEngine));
+        }
     }
 
     @Override
@@ -33,6 +39,7 @@ public class GameController extends GameObject {
         currentMillis = 0;
         asteroidsSpawned = 0;
         enemiesSpawned = 0;
+        powerupSpawned = 0;
     }
 
     @Override
@@ -58,6 +65,16 @@ public class GameController extends GameObject {
             enemiesSpawned++;
             return;
         }
+
+        waveTimestamp = powerupSpawned*TIME_BETWEEN_POWERUPS;
+        if (currentMillis > waveTimestamp) {
+            // Spawn a new powerup
+            Powerup p = powerupPool.remove(0);
+            p.init(gameEngine);
+            gameEngine.addGameObject(p);
+            powerupSpawned++;
+            return;
+        }
     }
 
     @Override
@@ -67,6 +84,10 @@ public class GameController extends GameObject {
 
     public void returnToPool(Asteroid asteroid) {
         asteroidPool.add(asteroid);
+    }
+
+    public void returnToPool(Powerup powerup) {
+        powerupPool.add(powerup);
     }
 
     public void returnToPool(Enemy enemy) {
