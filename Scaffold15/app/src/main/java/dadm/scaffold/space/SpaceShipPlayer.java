@@ -144,38 +144,39 @@ public class SpaceShipPlayer extends Sprite {
 
     }
 
+    public void handleHit(GameEngine gameEngine){
+        lives--;
+        if(lives <= 0){
+            gameEngine.removeGameObject(this);
+            gameEngine.endGame();
+            //TODO triggerear que se termine la partida y todo eso
+        }
+    }
+
     @Override
     public void onCollision(GameEngine gameEngine, ScreenGameObject otherObject) {
         if (otherObject instanceof Asteroid) {
-            lives--;
-
-            //gameEngine.stopGame();
             Asteroid a = (Asteroid) otherObject;
             a.removeObject(gameEngine);
             gameEngine.onGameEvent(GameEvent.SpaceshipHit);
 
+            handleHit(gameEngine);
+        }
 
-            if(lives <= 0){
-                gameEngine.removeGameObject(this);
-                gameEngine.endGame();
-                //TODO triggerear que se termine la partida y todo eso
-            }
+        if (otherObject instanceof Enemy) {
+            Enemy e = (Enemy) otherObject;
+            e.removeObject(gameEngine);
+            gameEngine.onGameEvent(GameEvent.SpaceshipHit);
+
+            handleHit(gameEngine);
         }
 
         if (otherObject instanceof EnemyBullet) {
-            lives--;
-
-            //gameEngine.stopGame();
             EnemyBullet eb = (EnemyBullet) otherObject;
             eb.removeObject(gameEngine);
             gameEngine.onGameEvent(GameEvent.SpaceshipHit);
 
-
-            if(lives <= 0){
-                gameEngine.removeGameObject(this);
-                gameEngine.endGame();
-                //TODO triggerear que se termine la partida y todo eso
-            }
+            handleHit(gameEngine);
         }
     }
 }
