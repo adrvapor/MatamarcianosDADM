@@ -22,6 +22,7 @@ import dadm.scaffold.engine.GameView;
 import dadm.scaffold.input.JoystickInputController;
 import dadm.scaffold.space.GameController;
 import dadm.scaffold.space.SpaceShipPlayer;
+import dadm.scaffold.engine.ParallaxBackground;
 
 
 public class GameFragment extends BaseFragment implements View.OnClickListener {
@@ -56,6 +57,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                 GameView gameView = (GameView) getView().findViewById(R.id.gameView);
                 theGameEngine = new GameEngine(getActivity(), gameView);
                 theGameEngine.setSoundManager(getScaffoldActivity().getSoundManager());
+                theGameEngine.addGameObject(new ParallaxBackground(theGameEngine, 20,R.drawable.fondo));
                 theGameEngine.setTheInputController(new JoystickInputController(getView()));
                 if(b != null)
                     theGameEngine.addGameObject(new SpaceShipPlayer(theGameEngine, b.getInt("shipIndex", 0)));
