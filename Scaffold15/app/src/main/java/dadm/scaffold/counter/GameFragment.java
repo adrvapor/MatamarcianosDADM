@@ -70,6 +70,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         });
 
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.customprogressbar));
         progressBar.setProgress(0);
 
         countDownTimer = new CountDownTimer(60000, 1000) {
