@@ -31,23 +31,20 @@ public class ScoreGameObject extends GameObject{
         mText.post(mUpdateTextRunnable);
     }
 
-
     public void onGameEvent(GameEvent gameEvent){
         if (gameEvent == GameEvent.AsteroidHit){
             mPoints += PUNTOS_GANADOS_POR_GLITCH;
             mPointsHaveChanged = true;
-        }
-        else if (gameEvent == GameEvent.VirusHit){
+        }else if (gameEvent == GameEvent.VirusHit){
             mPoints += PUNTOS_GANADOS_POR_VIRUS;
             mPointsHaveChanged = true;
-        }
-        else if (gameEvent == GameEvent.SpaceshipHit){
+        }else if (gameEvent == GameEvent.SpaceshipHit){
             mPoints -= PUNTOS_PERDIDOS_POR_GOLPE;
             mPointsHaveChanged = true;
         }else if (gameEvent == GameEvent.AsteroidOut){
             mPoints -= PUNTOS_PERDIDOS_POR_EVITAR_GLITCH;
             mPointsHaveChanged = true;
-        }else  if (gameEvent == GameEvent.EnemyOut){
+        }else if (gameEvent == GameEvent.EnemyOut){
             mPoints -= PUNTOS_PERDIDOS_POR_EVITAR_VIRUS;
             mPointsHaveChanged = true;
         }

@@ -66,7 +66,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                     theGameEngine.addGameObject(new SpaceShipPlayer(theGameEngine, b.getInt("shipIndex", 0)));
                 else
                     theGameEngine.addGameObject(new SpaceShipPlayer(theGameEngine, 0));
-                theGameEngine.addGameObject(new LivesCounter(view,R.id.lives_value));
+                theGameEngine.addGameObject(new LivesCounter(view,R.id.health_value));
                 theGameEngine.addGameObject(new FramesPerSecondCounter(theGameEngine));
                 theGameEngine.addGameObject(new GameController(theGameEngine));
                 theGameEngine.startGame();

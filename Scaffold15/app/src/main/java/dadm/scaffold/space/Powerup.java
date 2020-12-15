@@ -12,11 +12,24 @@ public class Powerup extends Sprite {
     private double speed;
     private double speedX;
     private double speedY;
+    public PowerupType type;
 
-    public Powerup(GameController gameController, GameEngine gameEngine) {
+    public Powerup(GameController gameController, GameEngine gameEngine, PowerupType pt) {
         super(gameEngine, R.drawable.robot);
         this.speed = 200d * pixelFactor/1000d;
         this.gameController = gameController;
+        this.type = pt;
+
+        switch (pt){
+            case Health:
+                changeBitmap(gameEngine, R.drawable.healthpower);
+                break;
+            case Shield:
+                changeBitmap(gameEngine, R.drawable.shieldpower);
+                break;
+            case Bullet:
+                changeBitmap(gameEngine, R.drawable.bulletpower);
+        }
     }
 
     public void init(GameEngine gameEngine) {

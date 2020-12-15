@@ -13,7 +13,7 @@ public class GameController extends GameObject {
 
     private static final int TIME_BETWEEN_ASTEROIDS = 500;
     private static final int TIME_BETWEEN_ENEMIES = 3000;
-    private static final int TIME_BETWEEN_POWERUPS = 4000;
+    private static final int TIME_BETWEEN_POWERUPS = 10000;
     private long currentMillis;
     private List<Asteroid> asteroidPool = new ArrayList<Asteroid>();
     private List<Enemy> enemyPool = new ArrayList<Enemy>();
@@ -21,6 +21,7 @@ public class GameController extends GameObject {
     private int asteroidsSpawned;
     private int enemiesSpawned;
     private int powerupSpawned;
+    private PowerupType[] powerupTypes = {PowerupType.Bullet, PowerupType.Shield, PowerupType.Health};
 
     public GameController(GameEngine gameEngine) {
         // We initialize the pool of items now
@@ -30,8 +31,8 @@ public class GameController extends GameObject {
         for (int i=0; i<2; i++) {
             enemyPool.add(new Enemy(this, gameEngine));
         }
-        for (int i=0; i<3; i++) {
-            powerupPool.add(new Powerup(this, gameEngine));
+        for (int i=0; i<powerupTypes.length; i++) {
+            powerupPool.add(new Powerup(this, gameEngine, powerupTypes[i]));
         }
         for (int i =0; i<5; i++){
             gameEngine.onGameEvent(GameEvent.LifeAdded);
