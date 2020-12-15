@@ -160,6 +160,7 @@ public class SpaceShipPlayer extends Sprite {
             gameEngine.onGameEvent(GameEvent.SpaceshipHit);
 
             handleHit(gameEngine);
+            gameEngine.onGameEvent(GameEvent.LifeLost);
         }
 
         if (otherObject instanceof Enemy) {
@@ -168,14 +169,17 @@ public class SpaceShipPlayer extends Sprite {
             gameEngine.onGameEvent(GameEvent.SpaceshipHit);
 
             handleHit(gameEngine);
+            gameEngine.onGameEvent(GameEvent.LifeLost);
         }
 
         if (otherObject instanceof EnemyBullet) {
+
             EnemyBullet eb = (EnemyBullet) otherObject;
             eb.removeObject(gameEngine);
             gameEngine.onGameEvent(GameEvent.SpaceshipHit);
 
             handleHit(gameEngine);
+            gameEngine.onGameEvent(GameEvent.LifeLost);
         }
     }
 }

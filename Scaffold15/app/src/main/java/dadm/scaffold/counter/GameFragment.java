@@ -21,6 +21,7 @@ import dadm.scaffold.engine.GameEngine;
 import dadm.scaffold.engine.GameView;
 import dadm.scaffold.engine.ScoreGameObject;
 import dadm.scaffold.input.JoystickInputController;
+import dadm.scaffold.sound.GameEvent;
 import dadm.scaffold.space.GameController;
 import dadm.scaffold.space.SpaceShipPlayer;
 import dadm.scaffold.engine.ParallaxBackground;
@@ -43,7 +44,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.btn_play_pause).setOnClickListener(this);
         final Bundle b = this.getArguments();
@@ -65,6 +66,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                     theGameEngine.addGameObject(new SpaceShipPlayer(theGameEngine, b.getInt("shipIndex", 0)));
                 else
                     theGameEngine.addGameObject(new SpaceShipPlayer(theGameEngine, 0));
+                theGameEngine.addGameObject(new LivesCounter(view,R.id.lives_value));
                 theGameEngine.addGameObject(new FramesPerSecondCounter(theGameEngine));
                 theGameEngine.addGameObject(new GameController(theGameEngine));
                 theGameEngine.startGame();

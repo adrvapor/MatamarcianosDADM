@@ -15,9 +15,9 @@ public class ScoreGameObject extends GameObject{
     private boolean mPointsHaveChanged;
     private static final double PUNTOS_GANADOS_POR_GLITCH = 0.1;
     private static final double PUNTOS_GANADOS_POR_VIRUS = 0.3;
-    private static final double PUNTOS_PERDIDOS_POR_GOLPE = 0.5;
-    private static final double PUNTOS_PERDIDOS_POR_EVITAR_GLITCH = 1;
-    private static final double PUNTOS_PERDIDOS_POR_EVITAR_VIRUS = 2;
+    private static final double PUNTOS_PERDIDOS_POR_GOLPE = 0.4;
+    private static final double PUNTOS_PERDIDOS_POR_EVITAR_GLITCH = 0.3;
+    private static final double PUNTOS_PERDIDOS_POR_EVITAR_VIRUS = 0.5;
     //endregion
 
 

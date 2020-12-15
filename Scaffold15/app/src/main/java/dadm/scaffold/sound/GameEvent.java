@@ -8,5 +8,7 @@ public enum GameEvent {
     EnemyLaserFired,
     SpecialLaserFired,
     EnemyOut,
-    AsteroidOut
+    AsteroidOut,
+    LifeLost,
+    LifeAdded
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 import dadm.scaffold.engine.GameEngine;
 import dadm.scaffold.engine.GameObject;
+import dadm.scaffold.sound.GameEvent;
 
 public class GameController extends GameObject {
 
@@ -31,6 +32,9 @@ public class GameController extends GameObject {
         }
         for (int i=0; i<3; i++) {
             powerupPool.add(new Powerup(this, gameEngine));
+        }
+        for (int i =0; i<5; i++){
+            gameEngine.onGameEvent(GameEvent.LifeAdded);
         }
     }
 
