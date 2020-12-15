@@ -40,7 +40,7 @@ public class ParallaxBackground extends ScreenGameObject{
         mBitmap = ((BitmapDrawable)spriteDrawable).getBitmap();
 
         mPixelFactor = gameEngine.pixelFactor* 0.5;
-        mSpeedX = speed*mPixelFactor/50d;
+        mSpeedX = speed*mPixelFactor/100d;
 
         mImageHeight = spriteDrawable.getIntrinsicHeight()*mPixelFactor;
         mImageWidth = spriteDrawable.getIntrinsicWidth()*mPixelFactor;

@@ -45,7 +45,7 @@ public class ScoreGameObject extends GameObject{
     private Runnable mUpdateTextRunnable = new Runnable() {
         @Override
         public void run() {
-            String text = String.format("%06f", mPoints);
+            String text = String.format("%03.1f", mPoints);
             mText.setText(text);
         }
     };

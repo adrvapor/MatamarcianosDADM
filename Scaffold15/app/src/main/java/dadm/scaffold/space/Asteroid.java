@@ -21,7 +21,7 @@ public class Asteroid extends Sprite {
 
     public void init(GameEngine gameEngine) {
         // They initialize in a [-30, 30] degrees angle
-        double angle = gameEngine.random.nextDouble()*Math.PI/3d-Math.PI/6d;
+        double angle = (gameEngine.random.nextDouble()*Math.PI/3d-Math.PI/6d)/2;
         speedX = - speed * Math.cos(angle);
         speedY = speed * Math.sin(angle);
         // Asteroids initialize in the central 50% of the screen horizontally
