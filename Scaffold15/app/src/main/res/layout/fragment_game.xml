@@ -102,23 +102,5 @@
 
     </TableLayout>
 
-    <TextView
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:id="@+id/lives_title"
-        android:layout_below="@+id/score_value"
-        android:layout_alignLeft="@+id/score_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/Negro"
-        android:text="@string/vidas" />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:id="@+id/lives_value"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/lives_title"
-        android:layout_alignLeft="@+id/lives_title"
-        android:layout_width="20dp"
-        android:layout_height="wrap_content" />
-
 
 </FrameLayout>
