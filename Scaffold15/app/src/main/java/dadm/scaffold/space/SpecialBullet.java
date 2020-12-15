@@ -60,7 +60,7 @@ public class SpecialBullet extends Sprite {
             // Remove both from the game (and return them to their pools)
             Enemy e = (Enemy) otherObject;
             e.takeDamage(gameEngine, 2);
-            //gameEngine.onGameEvent(GameEvent.AsteroidHit);
+            gameEngine.onGameEvent(GameEvent.VirusHit);
             // Add some score
         }
     }

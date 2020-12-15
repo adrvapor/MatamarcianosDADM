@@ -1,9 +1,12 @@
 package dadm.scaffold.space;
 
+import android.widget.GridLayout;
+
 import dadm.scaffold.R;
 import dadm.scaffold.engine.GameEngine;
 import dadm.scaffold.engine.ScreenGameObject;
 import dadm.scaffold.engine.Sprite;
+import dadm.scaffold.sound.GameEvent;
 
 public class Asteroid extends Sprite {
 
@@ -50,6 +53,7 @@ public class Asteroid extends Sprite {
             // Return to the pool
             gameEngine.removeGameObject(this);
             gameController.returnToPool(this);
+            gameEngine.onGameEvent(GameEvent.AsteroidOut);
         }
     }
 

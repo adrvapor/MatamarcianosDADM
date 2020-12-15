@@ -60,6 +60,7 @@ public class Enemy extends Sprite {
             // Return to the pool
             gameEngine.removeGameObject(this);
             gameController.returnToPool(this);
+            gameEngine.onGameEvent(GameEvent.EnemyOut);
         }
 
 
@@ -70,7 +71,7 @@ public class Enemy extends Sprite {
             }
             bullet.init(this, positionX, positionY + height);
             gameEngine.addGameObject(bullet);
-            //gameEngine.onGameEvent(GameEvent.LaserFired);
+            gameEngine.onGameEvent(GameEvent.EnemyLaserFired);
             timeSinceLastFire = 0;
         }
         else {

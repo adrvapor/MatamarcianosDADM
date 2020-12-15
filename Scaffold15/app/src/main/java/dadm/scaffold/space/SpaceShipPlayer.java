@@ -133,7 +133,7 @@ public class SpaceShipPlayer extends Sprite {
 
             sb.init(this, positionX + width, positionY + height);
             gameEngine.addGameObject(sb);
-            gameEngine.onGameEvent(GameEvent.LaserFired);
+            gameEngine.onGameEvent(GameEvent.SpecialLaserFired);
 
             timeSinceLastSpecialFire = 0;
         }

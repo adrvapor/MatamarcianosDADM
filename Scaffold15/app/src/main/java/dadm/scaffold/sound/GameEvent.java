@@ -4,5 +4,9 @@ public enum GameEvent {
     AsteroidHit,
     SpaceshipHit,
     LaserFired,
-    VirusHit
+    VirusHit,
+    EnemyLaserFired,
+    SpecialLaserFired,
+    EnemyOut,
+    AsteroidOut
 }
