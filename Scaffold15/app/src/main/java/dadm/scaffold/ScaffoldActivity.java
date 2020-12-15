@@ -50,11 +50,19 @@ public class ScaffoldActivity extends AppCompatActivity {
         navigateToFragment(gf);
     }
 
-    public void endGame(int points, boolean victory) {
-        navigateToFragment( new EndFragment());
+    public void endGame(double score, boolean victory) {
+        soundManager.loadMenuMusic();
+
+        Bundle b = new Bundle();
+        b.putDouble("score", score);
+        b.putBoolean("victory", victory);
+        EndFragment ef = new EndFragment();
+        ef.setArguments(b);
+        navigateToFragment(ef);
     }
 
     public void backToMenu(){
+        soundManager.loadMenuMusic();
         navigateToFragment(mainmenu);
     }
 

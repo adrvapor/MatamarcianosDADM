@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import dadm.scaffold.BaseFragment;
 import dadm.scaffold.R;
@@ -24,6 +25,22 @@ public class EndFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        if(getArguments().getBoolean("victory")){
+            double score = getArguments().getDouble("score", 0.0);
+            ((TextView)view.findViewById(R.id.end_title)).setText("CRÉDITOS CONSEGUIDOS:");
+            ((TextView)view.findViewById(R.id.score)).setText(String.format("%03.1f Créditos ECTS", score));
+
+            if(score <= 0)
+                ((TextView)view.findViewById(R.id.paragraph)).setText("Te tienes que esforzar mucho más...");
+            else
+                ((TextView)view.findViewById(R.id.paragraph)).setText(String.format("Buen trabajo, tu puntuación equivale a %01.1f asignaturas superadas", score / 6));
+        }
+        else{
+            ((TextView)view.findViewById(R.id.end_title)).setText("HAS FRACASADO");
+            ((TextView)view.findViewById(R.id.score)).setVisibility(View.GONE);
+            ((TextView)view.findViewById(R.id.paragraph)).setText("No has podido evitar que la descarga de MyApps tenga errores...");
+        }
 
         view.findViewById(R.id.btn_restart).setOnClickListener(new View.OnClickListener() {
             @Override

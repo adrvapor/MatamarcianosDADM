@@ -20,12 +20,13 @@ public final class SoundManager {
 	
 	private Context context;
 	private SoundPool soundPool;
-	private MediaPlayer bgPlayer;
+	private MediaPlayer bgMenuPlayer;
+	private MediaPlayer bgLevelPlayer;
 
 	public SoundManager(Context context) {
 		this.context = context;
 		loadSounds();
-		loadMusic();
+		loadMenuMusic();
 	}
 
 	private void loadEventSound(Context context, GameEvent event, String... filename) {
@@ -51,20 +52,49 @@ public final class SoundManager {
 		soundsMap = new HashMap<GameEvent, Integer>();
 		loadEventSound(context, GameEvent.AsteroidHit, "Asteroid_explosion_1.wav");
 		loadEventSound(context, GameEvent.SpaceshipHit, "Spaceship_explosion.wav");
-		loadEventSound(context, GameEvent.LaserFired, "Laser_shoot.wav");
+		loadEventSound(context, GameEvent.LaserFired, "shiplaser.ogg");
+		loadEventSound(context, GameEvent.VirusHit, "viruslaser.ogg");
 	}
 
-	private void loadMusic() {
+	public void loadMenuMusic() {
 		try {
+			if(bgLevelPlayer != null)
+				unloadLevelMusic();
+
+			if(bgMenuPlayer != null)
+				unloadMenuMusic();
+
 			// Important to not reuse it. It can be on a strange state
-			bgPlayer = new MediaPlayer();
-			AssetFileDescriptor afd = context.getAssets().openFd("sfx/Riccardo_Colombo_-_11_-_Something_mental.mp3");
-			bgPlayer.setDataSource(afd.getFileDescriptor(),
+			bgMenuPlayer = new MediaPlayer();
+			AssetFileDescriptor afd = context.getAssets().openFd("sfx/menu.mp3");
+			bgMenuPlayer.setDataSource(afd.getFileDescriptor(),
 					afd.getStartOffset(), afd.getLength());
-			bgPlayer.setLooping(true);
-			bgPlayer.setVolume(DEFAULT_MUSIC_VOLUME, DEFAULT_MUSIC_VOLUME);
-			bgPlayer.prepare();
-			bgPlayer.start();
+			bgMenuPlayer.setLooping(true);
+			bgMenuPlayer.setVolume(DEFAULT_MUSIC_VOLUME, DEFAULT_MUSIC_VOLUME);
+			bgMenuPlayer.prepare();
+			bgMenuPlayer.start();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void loadLevelMusic(){
+		try {
+			if(bgMenuPlayer != null)
+				unloadMenuMusic();
+
+			if(bgLevelPlayer != null)
+				unloadLevelMusic();
+
+			bgLevelPlayer = new MediaPlayer();
+			AssetFileDescriptor afd = context.getAssets().openFd("sfx/level.mp3");
+			bgLevelPlayer.setDataSource(afd.getFileDescriptor(),
+					afd.getStartOffset(), afd.getLength());
+			bgLevelPlayer.setLooping(true);
+			bgLevelPlayer.setVolume(DEFAULT_MUSIC_VOLUME, DEFAULT_MUSIC_VOLUME);
+			bgLevelPlayer.prepare();
+			bgLevelPlayer.start();
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -93,8 +123,13 @@ public final class SoundManager {
 		soundsMap.clear();		
 	}
 
-	private void unloadMusic() {
-		bgPlayer.stop();
-		bgPlayer.release();
+	private void unloadMenuMusic() {
+		//bgMenuPlayer.stop();
+		bgMenuPlayer.release();
+	}
+
+	private void unloadLevelMusic() {
+		//bgLevelPlayer.stop();
+		bgLevelPlayer.release();
 	}
 }

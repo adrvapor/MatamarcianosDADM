@@ -148,8 +148,7 @@ public class SpaceShipPlayer extends Sprite {
         lives--;
         if(lives <= 0){
             gameEngine.removeGameObject(this);
-            gameEngine.endGame();
-            //TODO triggerear que se termine la partida y todo eso
+            gameEngine.endGame(0, false);
         }
     }
 

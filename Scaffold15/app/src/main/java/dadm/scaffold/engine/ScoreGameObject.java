@@ -15,6 +15,7 @@ public class ScoreGameObject extends GameObject{
     private boolean mPointsHaveChanged;
     private static final double PUNTOS_GANADOS_POR_GLITCH = 0.1;
     private static final double PUNTOS_GANADOS_POR_VIRUS = 0.3;
+    private static final double PUNTOS_PERDIDOS_POR_GOLPE = 0.5;
     //endregion
 
 
@@ -38,8 +39,12 @@ public class ScoreGameObject extends GameObject{
             mPoints += PUNTOS_GANADOS_POR_VIRUS;
             mPointsHaveChanged = true;
         }
+        else if (gameEvent == GameEvent.SpaceshipHit){
+            mPoints -= PUNTOS_PERDIDOS_POR_GOLPE;
+            mPointsHaveChanged = true;
+        }
 
-
+        if (mPoints < 0) mPoints = 0;
     }
 
     private Runnable mUpdateTextRunnable = new Runnable() {
@@ -52,7 +57,8 @@ public class ScoreGameObject extends GameObject{
 
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
-
+        if(mPointsHaveChanged)
+            gameEngine.score = mPoints;
     }
 
     @Override

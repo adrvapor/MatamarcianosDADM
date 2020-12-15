@@ -85,4 +85,9 @@ public class MainMenuFragment extends BaseFragment{
         }
     }
 
+    @Override
+    public boolean onBackPressed() {
+        android.os.Process.killProcess(android.os.Process.myPid());
+        return true;
+    }
 }

@@ -39,6 +39,7 @@ public class GameEngine {
     public int height;
     public double pixelFactor;
     public int totalTime = 0;
+    public double score = 0;
 
     private Activity mainActivity;
 
@@ -85,8 +86,12 @@ public class GameEngine {
 
     public void endGame() {
         this.stopGame();
+        ((ScaffoldActivity)mainActivity).endGame(score, true);
+    }
 
-        ((ScaffoldActivity)mainActivity).endGame(0, true);
+    public void endGame(double d, boolean b) {
+        this.stopGame();
+        ((ScaffoldActivity)mainActivity).endGame(d, b);
     }
 
     public void stopGame() {
@@ -221,6 +226,7 @@ public class GameEngine {
 
     public void setSoundManager(SoundManager soundManager) {
         this.soundManager = soundManager;
+        soundManager.loadLevelMusic();
     }
 
     public void onGameEvent (GameEvent gameEvent) {
