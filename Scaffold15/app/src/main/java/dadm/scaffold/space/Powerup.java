@@ -15,7 +15,7 @@ public class Powerup extends Sprite {
     public PowerupType type;
 
     public Powerup(GameController gameController, GameEngine gameEngine, PowerupType pt) {
-        super(gameEngine, R.drawable.robot);
+        super(gameEngine, R.drawable.healthpower);
         this.speed = 200d * pixelFactor/1000d;
         this.gameController = gameController;
         this.type = pt;
